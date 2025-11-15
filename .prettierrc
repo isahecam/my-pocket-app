@@ -1,0 +1,14 @@
+{
+  "trailingComma": "es5",
+  "arrowParens": "avoid",
+  "tabWidth": 2,
+  "printWidth": 100,
+  "bracketSameLine": true,
+  "semi": true,
+  "endOfLine": "lf",
+  "singleAttributePerLine": false,
+  "singleQuote": false,
+  "quoteProps": "as-needed",
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./app/globals.css"
+}
