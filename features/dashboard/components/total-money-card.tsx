@@ -9,7 +9,7 @@ async function TotalMoneyValue() {
   const totalMoney = await getTotalMoney();
 
   return (
-    <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+    <CardTitle className="font-semibold @[250px]/card:text-3xl text-2xl tabular-nums">
       {formatCurrency(totalMoney, "MXN")}
     </CardTitle>
   );

@@ -19,13 +19,13 @@ export function DashboardSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar variant="inset" collapsible="icon">
+    <Sidebar collapsible="icon" variant="inset">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Mi Pocket App</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {SIDEBAR_ITEMS.map(item => (
+              {SIDEBAR_ITEMS.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={pathname === item.url}>
                     <Link href={item.url}>

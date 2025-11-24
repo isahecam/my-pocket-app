@@ -8,7 +8,7 @@ async function TotalIncomesValue() {
   const totalIncomes = await getTotalIncomes();
 
   return (
-    <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+    <CardTitle className="font-semibold @[250px]/card:text-3xl text-2xl tabular-nums">
       {totalIncomes}
     </CardTitle>
   );

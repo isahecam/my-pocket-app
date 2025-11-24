@@ -1,10 +1,14 @@
-import { ArrowUpIcon, LayoutDashboardIcon, type LucideIcon } from "lucide-react";
+import {
+  ArrowUpIcon,
+  LayoutDashboardIcon,
+  type LucideIcon,
+} from "lucide-react";
 
-export interface SidebarItem {
+export type SidebarItem = {
   title: string;
   url: string;
   icon: LucideIcon;
-}
+};
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
