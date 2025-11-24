@@ -4,10 +4,15 @@ import z from "zod";
 
 import { createClient } from "@/utils/supabase/server";
 
-import { CreateIncome, createIncomeSchema } from "../schemas/income.schema";
-import { ActionResult } from "../types/income.types";
+import {
+  type CreateIncome,
+  createIncomeSchema,
+} from "../schemas/income.schema";
+import type { ActionResult } from "../types/income.types";
 
-export async function createIncomeAction(input: CreateIncome): Promise<ActionResult> {
+export async function createIncomeAction(
+  input: CreateIncome
+): Promise<ActionResult> {
   const validatedFields = createIncomeSchema.safeParse(input);
 
   // * If the fields are not valid, return the validation errors
@@ -16,7 +21,8 @@ export async function createIncomeAction(input: CreateIncome): Promise<ActionRes
 
     return {
       success: false,
-      message: "Tu ingreso no se pudo crear, por favor revisa los campos y vuelve a intentarlo.",
+      message:
+        "Tu ingreso no se pudo crear, por favor revisa los campos y vuelve a intentarlo.",
       validationErrors: flattenedErrors.fieldErrors,
       data: input,
     };

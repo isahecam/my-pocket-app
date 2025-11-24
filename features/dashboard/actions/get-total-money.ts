@@ -11,7 +11,10 @@ export async function getTotalMoney() {
   const supabase = await createClient();
 
   const { data: incomes } = await supabase.from("incomes").select();
-  const totalMoney = incomes?.reduce((acc, income) => acc + Number(income.amount), 0);
+  const totalMoney = incomes?.reduce(
+    (acc, income) => acc + Number(income.amount),
+    0
+  );
 
   return totalMoney ?? 0;
 }
