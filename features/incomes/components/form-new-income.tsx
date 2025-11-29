@@ -33,12 +33,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { createIncomeAction } from "@/features/incomes/actions/create-income.action";
 import {
   type CreateIncome,
   createIncomeSchema,
 } from "@/features/incomes/schemas/income.schema";
-
-import { createIncomeAction } from "../actions/create-income.action";
 
 export function FormNewIncome() {
   const form = useForm<CreateIncome>({
