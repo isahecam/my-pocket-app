@@ -2,10 +2,9 @@ import { PlusIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { FormNewIncome } from "./form-new-income";
 
-import { IncomeForm } from "./income-form";
-
-export function DialogIncome() {
+export function DialogNewIncome() {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -15,7 +14,7 @@ export function DialogIncome() {
         </Button>
       </DialogTrigger>
 
-      <IncomeForm />
+      <FormNewIncome />
     </Dialog>
   );
 }
