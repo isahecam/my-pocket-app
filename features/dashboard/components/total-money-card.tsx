@@ -1,9 +1,7 @@
 import { CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/utils/helpers/format-currency";
-
-import { getTotalMoney } from "../actions/get-total-money";
-
-import { SummaryCard } from "./cards/summary-card";
+import { getTotalMoney } from "@/features/dashboard/actions/get-total-money";
+import { SummaryCard } from "@/features/dashboard/components/cards/summary-card";
+import { formatCurrency } from "@/shared/helpers/format-currency";
 
 async function TotalMoneyValue() {
   const totalMoney = await getTotalMoney();
