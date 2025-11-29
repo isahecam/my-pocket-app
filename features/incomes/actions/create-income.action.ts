@@ -1,14 +1,13 @@
 "use server";
 
+import { updateTag } from "next/cache";
 import z from "zod";
-
-import { createClient } from "@/utils/supabase/server";
-
 import {
   type CreateIncome,
   createIncomeSchema,
-} from "../schemas/income.schema";
-import type { ActionResult } from "../types/income.types";
+} from "@/features/incomes/schemas/income.schema";
+import type { ActionResult } from "@/features/incomes/types/income.types";
+import { createClient } from "@/utils/supabase/server";
 
 export async function createIncomeAction(
   input: CreateIncome
@@ -41,6 +40,9 @@ export async function createIncomeAction(
   }
 
   // * Success case
+
+  updateTag("all-incomes");
+
   return {
     success: true,
     message: "Ingreso creado exitosamente",
