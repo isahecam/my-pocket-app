@@ -1,8 +1,8 @@
 "use client";
 
+import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import {
   Sidebar,
   SidebarContent,
@@ -28,7 +28,7 @@ export function DashboardSidebar() {
               {SIDEBAR_ITEMS.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={pathname === item.url}>
-                    <Link href={item.url}>
+                    <Link href={item.url as Route} prefetch>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
