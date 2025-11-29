@@ -40,7 +40,7 @@ import {
 
 import { createIncomeAction } from "../actions/create-income.action";
 
-export function IncomeForm() {
+export function FormNewIncome() {
   const form = useForm<CreateIncome>({
     resolver: zodResolver(createIncomeSchema),
     defaultValues: {
