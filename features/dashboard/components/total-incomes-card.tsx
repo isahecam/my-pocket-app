@@ -1,8 +1,8 @@
 import { CardTitle } from "@/components/ui/card";
 
-import { getTotalIncomes } from "../actions/get-total-incomes";
+import { getTotalIncomes } from "@/features/dashboard/actions/get-total-incomes";
 
-import { SummaryCard } from "./cards/summary-card";
+import { SummaryCard } from "@/features/dashboard/components/cards/summary-card";
 
 async function TotalIncomesValue() {
   const totalIncomes = await getTotalIncomes();
