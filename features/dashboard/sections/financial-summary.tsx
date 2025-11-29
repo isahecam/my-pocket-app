@@ -1,5 +1,5 @@
-import { TotalIncomesCard } from "../components/total-incomes-card";
-import { TotalMoneyCard } from "../components/total-money-card";
+import { TotalIncomesCard } from "@/features/dashboard/components/total-incomes-card";
+import { TotalMoneyCard } from "@/features/dashboard/components/total-money-card";
 
 export function FinancialSummarySection() {
   return (
