@@ -2,9 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DollarSignIcon, FileTextIcon, Loader2Icon } from "lucide-react";
+import { useTransition } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-
 import { Button } from "@/components/ui/button";
 import {
   DialogClose,
@@ -33,14 +33,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { createIncomeAction } from "@/features/incomes/actions/create-income.action";
 import {
   type CreateIncome,
   createIncomeSchema,
 } from "@/features/incomes/schemas/income.schema";
 
-import { createIncomeAction } from "../actions/create-income.action";
+export function FormNewIncome() {
+const [isPending, startTransition] = useTransition();
 
-export function IncomeForm() {
   const form = useForm<CreateIncome>({
     resolver: zodResolver(createIncomeSchema),
     defaultValues: {
@@ -52,12 +53,16 @@ export function IncomeForm() {
     },
   });
 
-  const onSubmit = async (input: CreateIncome) => {
-    const { success, message } = await createIncomeAction(input);
-    if (!success) {
-      return toast.error(message);
-    }
-    return toast.success(message);
+  const onSubmit = (input: CreateIncome) => {
+    startTransition(async () => {
+      const { success, message } = await createIncomeAction(input);
+      if (!success) {
+        toast.error(message);
+        return;
+      }
+      toast.success(message);
+      form.reset();
+    });
   };
 
   return (
@@ -84,8 +89,8 @@ export function IncomeForm() {
                   <Input
                     {...field}
                     aria-invalid={fieldState.invalid}
-                    autoComplete="off"
-                    disabled={form.formState.isSubmitting}
+                    autoComplete="on"
+                    disabled={isPending}
                     id="income-form-concept"
                     placeholder="Ej: Salario mensual, devolución de impuestos, ingreso por freelance"
                     type="text"
@@ -107,17 +112,10 @@ export function IncomeForm() {
                   <InputGroup>
                     <InputGroupInput
                       {...field}
-                      disabled={form.formState.isSubmitting}
+                      disabled={isPending}
                       id="income-form-amount"
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        field.onChange(
-                          value === "" ? undefined : Number(value)
-                        );
-                      }}
-                      placeholder="Ej: 100.00"
+                      placeholder="0.00"
                       type="number"
-                      value={field.value || ""}
                     />
                     <InputGroupAddon>
                       <DollarSignIcon />
@@ -140,7 +138,7 @@ export function IncomeForm() {
                     Tipo de moneda
                   </FieldLabel>
                   <Select
-                    disabled={form.formState.isSubmitting}
+                    disabled={isPending}
                     name={field.name}
                     onValueChange={field.onChange}
                     value={field.value}
@@ -154,9 +152,6 @@ export function IncomeForm() {
                     </SelectTrigger>
                     <SelectContent position="item-aligned">
                       <SelectItem value="MXN">MXN (Peso Mexicano)</SelectItem>
-                      <SelectItem value="USD">
-                        USD (Dólar Estadounidense)
-                      </SelectItem>
                     </SelectContent>
                   </Select>
                   {fieldState.invalid && (
@@ -177,7 +172,7 @@ export function IncomeForm() {
                     {...field}
                     aria-invalid={fieldState.invalid}
                     autoComplete="off"
-                    disabled={form.formState.isSubmitting}
+                    disabled={isPending}
                     id="income-form-date"
                     type="date"
                   />
@@ -202,7 +197,7 @@ export function IncomeForm() {
                       {...field}
                       aria-invalid={fieldState.invalid}
                       className="min-h-26 resize-none"
-                      disabled={form.formState.isSubmitting}
+                      disabled={isPending}
                       id="income-form-details"
                       placeholder="Agrega detalles del ingreso"
                       rows={4}
@@ -219,21 +214,21 @@ export function IncomeForm() {
       </form>
       <DialogFooter>
         <DialogClose asChild>
-          <Button disabled={form.formState.isSubmitting} variant="outline">
+          <Button disabled={isPending} variant="outline">
             Cancelar
           </Button>
         </DialogClose>
         <Button
-          disabled={form.formState.isSubmitting}
+          disabled={isPending}
           form="income-form"
           type="submit"
         >
-          {form.formState.isSubmitting && (
+          {isPending && (
             <>
               <Loader2Icon className="size-4 animate-spin" /> Agregando
             </>
           )}
-          {!form.formState.isSubmitting && "Agregar"}
+          {!isPending && "Agregar"}
         </Button>
       </DialogFooter>
     </DialogContent>

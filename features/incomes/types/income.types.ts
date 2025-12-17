@@ -1,4 +1,4 @@
-import type { CreateIncome } from "../schemas/income.schema";
+import type { CreateIncome } from "@/features/incomes/schemas/income.schema";
 
 export type ForeignCurrency = "MXN" | "USD";
 
